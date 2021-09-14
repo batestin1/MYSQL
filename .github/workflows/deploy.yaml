@@ -1,0 +1,28 @@
+name: deploy to Bucket
+
+on:
+  push:
+    branches: [aws]
+
+jobs:
+  deploy:
+    name: Deploy to S3
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Python 3.8
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
+
+   steps:
+    - uses: mirromutth/mysql-action@v1.1
+      with:
+        host port: 3306
+        mysql version: '8.0.21' # Optional, default value is "latest". The version of the MySQL
+        mysql database: 'assassinatos' # Optional, default value is "test". The specified database which will be create
+        mysql root password: 
+        mysql user: 'root' # Required if "mysql root password" is empty, default is empty. The superuser for the specified database. Can use secrets, too
+   
