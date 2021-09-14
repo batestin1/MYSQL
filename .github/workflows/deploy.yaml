@@ -2,11 +2,11 @@ name: deploy to Bucket
 
 on:
   push:
-    branches: [aws]
+    branches: [mysql]
 
 jobs:
   deploy:
-    name: Deploy to S3
+    name: Deploy to MYSQL
     runs-on: ubuntu-latest
 
     steps:
