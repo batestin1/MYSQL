@@ -36,4 +36,4 @@ jobs:
         DATABASE_SCRIPT: 
           run: |
         cd assassinatos
-        load.py
+        python load.py
