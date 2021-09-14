@@ -33,4 +33,4 @@ jobs:
         # Password used to connect to database
         DATABASE_PASSWORD: 
         # Script run on database
-        DATABASE_SCRIPT: 
+        DATABASE_SCRIPT: load.py
