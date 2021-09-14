@@ -17,23 +17,20 @@ jobs:
       with:
         python-version: 3.8
 
-    - name: MySQL Deploy Action
+   - name: Start MySQL
       # You may pin to the exact commit or the version.
-      # uses: calxus/mysql-deploy-action@a2c3adfffe4002b02a06c3deb43449d69803c21b
-      uses: calxus/mysql-deploy-action@v1
+      # uses: samin/mysql-action@4dd1210f1d6b9c2468adec44066ef4a97b8f07f3
+      uses: samin/mysql-action@v1.3
       with:
-        # Hostname used to connect to database
-        DATABASE_HOST: localhost
-        # Port used to connect to database
-        DATABASE_PORT: # optional, default is 3306
-        # Name of database to connect to
-        DATABASE_NAME: assassinatos
-        # Username used to connect to database
-        DATABASE_USERNAME: root
-        # Password used to connect to database
-        DATABASE_PASSWORD: 
-        # Script run on database
-        DATABASE_SCRIPT: 
-          run: |
-        cd assassinatos
-        python load.py
+        # The port of host
+        host port: # optional, default is 3306
+        # The port of container
+        mysql version: 8.0.21
+        # MYSQL_ROOT_PASSWORD - root superuser password
+        mysql root password: # optional, default is 
+        # MYSQL_DATABASE - name for the default database that is created
+        mysql database: assassinatos
+        # MYSQL_USER - create the specified user with superuser power for created database
+        mysql user: root
+        # MYSQL_PASSWORD - specified superuser password which user is power for created database
+        mysql password: # optional, default is 
