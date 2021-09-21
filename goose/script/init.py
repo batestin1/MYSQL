@@ -1,4 +1,0 @@
-from load import goose
-
-if __name__ == '__main__':
-    goose()
