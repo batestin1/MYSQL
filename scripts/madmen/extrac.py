@@ -15,11 +15,7 @@
 import pyspark
 from pyspark import SparkContext, SparkConf
 from pyspark.sql import SparkSession
-conf = pyspark.SparkConf().setAppName('series').setMaster('local')
-sc = pyspark.SparkContext(conf=conf)
-spark = SparkSession(sc)
 from pyspark.sql import SQLContext
-sql_c = SQLContext(sc)
 import logging
 import sys
 # Configuracao de logs de aplicacao

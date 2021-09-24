@@ -25,12 +25,7 @@ from pyspark.sql.functions import collect_set,sum,avg,max,countDistinct,count
 from pyspark.sql.functions import first, last, kurtosis, min, mean, skewness
 from pyspark.sql.functions import stddev, stddev_samp, stddev_pop, sumDistinct, map_values
 from pyspark.sql.functions import variance,var_samp,  var_pop
-
-conf = pyspark.SparkConf().setAppName('crimes').setMaster('local')
-sc = pyspark.SparkContext(conf=conf)
-spark = SparkSession(sc)
 from pyspark.sql import SQLContext
-sql_c = SQLContext(sc)
 import logging
 import sys
 # Configuracao de logs de aplicacao

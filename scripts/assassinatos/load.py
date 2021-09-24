@@ -14,7 +14,7 @@
 #import
 import mysql.connector
 from sqlalchemy import create_engine
-from assassinatos.transform import Transform
+from transform import Transform
 
 import logging
 import sys
@@ -25,7 +25,7 @@ logger.setLevel(logging.DEBUG)
 
 #connection
 banco = mysql.connector.connect(
-    host = "localhost",
+    host = "127.0.0.1",
     user= "root",
     password = ""
 )
@@ -34,7 +34,7 @@ cursor = banco.cursor()
 
 cursor = banco.cursor()
 cursor.execute('CREATE DATABASE assassinatos')
-my_conn = create_engine('mysql+mysqldb://root:@localhost/assassinatos')
+my_conn = create_engine('mysql+mysqldb://root:@127.0.0.1/assassinatos')
 
 
 

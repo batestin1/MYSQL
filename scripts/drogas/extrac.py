@@ -16,11 +16,7 @@ import pyspark
 from pyspark import SparkContext, SparkConf
 from pyspark.sql.types import StructField,IntegerType, StructType,StringType, DoubleType
 from pyspark.sql import SparkSession
-conf = pyspark.SparkConf().setAppName('drogas').setMaster('local')
-sc = pyspark.SparkContext(conf=conf)
-spark = SparkSession(sc)
 from pyspark.sql import SQLContext
-sql_c = SQLContext(sc)
 import logging
 import sys
 # Configuracao de logs de aplicacao

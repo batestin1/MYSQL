@@ -20,7 +20,7 @@ import sys
 # Configuracao de logs de aplicacao
 logging.basicConfig(stream=sys.stdout)
 logger = logging.getLogger('CASAMENTO')
-logger.setLevel(logging.DEBUG)S
+logger.setLevel(logging.DEBUG)
 
 #connection
 banco = mysql.connector.connect(

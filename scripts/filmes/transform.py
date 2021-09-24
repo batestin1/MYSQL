@@ -18,7 +18,6 @@ from pyspark.shell import sqlContext, spark
 from pyspark.sql.functions import desc
 from pyspark.sql.functions import *
 from pyspark.sql.functions import countDistinct
-
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import col
 from pyspark.sql.functions import concat, col, lit

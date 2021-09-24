@@ -6,21 +6,20 @@
 # Created on 21 de Julho de 2021
 #
 #     Projeto base: Assassinatos
-#     Repositório: MYSQL
+#     Repositï¿½rio: MYSQL
 #     Author: Maycon Cypriano Batestin
 #
 ##################################################################################################################################################################
 ##################################################################################################################################################################
 #imports
-from assassinatos.extrac import Extrac
+from extrac import Extrac
 import logging
 import sys
 # Configuracao de logs de aplicacao
 logging.basicConfig(stream=sys.stdout)
 logger = logging.getLogger('ASSASSINATO')
 logger.setLevel(logging.DEBUG)
-dados = Extrac().dados
-dados2 = Extrac().dados2
+
 
 
 class Transform():

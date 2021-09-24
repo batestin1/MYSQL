@@ -8,4 +8,3 @@
 >> Arquitetura da solução:
 
 ![delta](img/orquestracao.png)
-s
