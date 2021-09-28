@@ -25,7 +25,7 @@ logger.setLevel(logging.DEBUG)
 
 #connection
 banco = mysql.connector.connect(
-    host = "localhost",
+    host = "mysql",
     user= "root",
     password = ""
 )
@@ -34,7 +34,7 @@ cursor = banco.cursor()
 
 cursor = banco.cursor()
 cursor.execute('CREATE DATABASE series')
-my_conn = create_engine('mysql+mysqldb://root:@localhost/series')
+my_conn = create_engine('mysql+mysqldb://root:@mysql/series')
 
 
 def serie():

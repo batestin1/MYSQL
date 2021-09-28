@@ -25,7 +25,7 @@ logger.setLevel(logging.DEBUG)
 
 #connection
 banco = mysql.connector.connect(
-    host = "127.0.0.1",
+    host = "mysql",
     user= "root",
     password = ""
 )
@@ -34,7 +34,7 @@ cursor = banco.cursor()
 
 cursor = banco.cursor()
 cursor.execute('CREATE DATABASE assassinatos')
-my_conn = create_engine('mysql+mysqldb://root:@127.0.0.1/assassinatos')
+my_conn = create_engine('mysql+mysqldb://root:@mysql/assassinatos')
 
 
 

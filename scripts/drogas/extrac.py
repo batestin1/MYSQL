@@ -13,10 +13,26 @@
 ##################################################################################################################################################################
 #imports
 import pyspark
-from pyspark import SparkContext, SparkConf
-from pyspark.sql.types import StructField,IntegerType, StructType,StringType, DoubleType
 from pyspark.sql import SparkSession
+from pyspark.sql.functions import col, lit, overlay, concat, concat_ws
+from pyspark.sql.types import StructType, StructField, StringType, IntegerType, MapType
+from pyspark.sql.functions import desc, expr
+from pyspark.sql.functions import approx_count_distinct,collect_list
+from pyspark.sql.functions import collect_set,sum,avg,max,countDistinct,count
+from pyspark.sql.functions import first, last, kurtosis, min, mean, skewness
+from pyspark.sql.functions import stddev, stddev_samp, stddev_pop, sumDistinct, map_values
+from pyspark.sql.functions import variance,var_samp,  var_pop
 from pyspark.sql import SQLContext
+import logging
+import sys
+
+# Cria objeto da Spark Session
+spark = (SparkSession.builder.appName("DeltaExercise")
+    .config("spark.jars.packages", "io.delta:delta-core_2.12:1.0.0")
+    .config("spark.sql.extensions", "io.delta.sql.DeltaSparkSessionExtension")
+    .config("spark.sql.catalog.spark_catalog", "org.apache.spark.sql.delta.catalog.DeltaCatalog")
+    .getOrCreate()
+)
 import logging
 import sys
 # Configuracao de logs de aplicacao
@@ -57,7 +73,7 @@ class Extrac():
               StructField('sedative-frequency', DoubleType(), True)
                  ]
         finalStruct = StructType(fields=df)
-        self.dados = sql_c.read.csv("../../dataset/drug-use-by-age.csv", header= True, schema= finalStruct, encoding='cp1252')
+        self.dados = spark.read.csv("../../dataset/drug-use-by-age.csv", header= True, schema= finalStruct, encoding='cp1252')
 
 
 

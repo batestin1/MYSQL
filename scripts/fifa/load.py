@@ -26,7 +26,7 @@ logger.setLevel(logging.DEBUG)
 
 # connection
 banco = mysql.connector.connect(
-    host="localhost",
+    host="mysql",
     user="root",
     password=""
 )
@@ -35,7 +35,7 @@ cursor = banco.cursor()
 
 cursor = banco.cursor()
 cursor.execute('CREATE DATABASE fifa')
-my_conn = create_engine('mysql+mysqldb://root:@localhost/fifa')
+my_conn = create_engine('mysql+mysqldb://root:@mysql/fifa')
 
 
 # function

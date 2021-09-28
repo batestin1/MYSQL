@@ -15,8 +15,6 @@
 #imports
 import pyspark
 from pyspark.sql import SparkSession
-
-from pyspark.sql import SparkSession
 from pyspark.sql.functions import col, lit, overlay, concat, concat_ws
 from pyspark.sql.types import StructType, StructField, StringType, IntegerType, MapType
 from pyspark.sql.functions import desc, expr
@@ -28,6 +26,16 @@ from pyspark.sql.functions import variance,var_samp,  var_pop
 from pyspark.sql import SQLContext
 import logging
 import sys
+
+# Cria objeto da Spark Session
+spark = (SparkSession.builder.appName("DeltaExercise")
+    .config("spark.jars.packages", "io.delta:delta-core_2.12:1.0.0")
+    .config("spark.sql.extensions", "io.delta.sql.DeltaSparkSessionExtension")
+    .config("spark.sql.catalog.spark_catalog", "org.apache.spark.sql.delta.catalog.DeltaCatalog")
+    .getOrCreate()
+)
+import logging
+import sys
 # Configuracao de logs de aplicacao
 logging.basicConfig(stream=sys.stdout)
 logger = logging.getLogger('CRIMES')
@@ -36,7 +44,7 @@ logger.setLevel(logging.DEBUG)
 class Extrac():
     def __init__(self):
         #extract
-        self.dados = sql_c.read.csv("../../dataset/hate_crimes.csv", header= True, inferSchema=True)
+        self.dados = spark.read.csv("../../dataset/hate_crimes.csv", header= True, inferSchema=True)
 
 
 logger.info("EXTRAÇÃO DOS DADOS BRUTOS")

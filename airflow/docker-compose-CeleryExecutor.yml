@@ -78,6 +78,8 @@ services:
             # - POSTGRES_DB=airflow
             # - REDIS_PASSWORD=redispass
         command: scheduler
+       
+
 
     worker:
         image: neylsoncrepalde/airflow-docker:2.0.0-pymongo
@@ -93,8 +95,107 @@ services:
         environment:
             - FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho=
             - EXECUTOR=Celery
+            - SPARK = spark://spark:7077
             # - POSTGRES_USER=airflow
             # - POSTGRES_PASSWORD=airflow
             # - POSTGRES_DB=airflow
             # - REDIS_PASSWORD=redispass
         command: celery worker
+        
+        
+        
+  
+
+    mysql:
+        image: mysql
+        environment:
+            - MYSQL_ALLOW_EMPTY_PASSWORD=1
+        restart: always
+    
+    spark:
+        image: bitnami/spark:3.1.2
+        user: root # Run container as root container: https://docs.bitnami.com/tutorials/work-with-non-root-containers/
+        hostname: spark
+        networks:
+            - default_net
+        environment:
+            - SPARK_MODE=master
+            - SPARK_RPC_AUTHENTICATION_ENABLED=no
+            - SPARK_RPC_ENCRYPTION_ENABLED=no
+            - SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED=no
+            - SPARK_SSL_ENABLED=no
+        volumes:
+            - ../spark/app:/usr/local/airflow/myslq # Spark scripts folder (Must be the same path in airflow and Spark Cluster)
+            - ../spark/resources:/usr/local/airflow/myslq #Resources folder (Must be the same path in airflow and Spark Cluster)
+        ports:
+            - "8181:8080"
+            - "7077:7077"
+
+    spark-worker-1:
+        image: bitnami/spark:3.1.2
+        user: root
+        networks:
+            - default_net
+        environment:
+            - SPARK_MODE=worker
+            - SPARK_MASTER_URL=spark://spark:7077
+            - SPARK_WORKER_MEMORY=1G
+            - SPARK_WORKER_CORES=1
+            - SPARK_RPC_AUTHENTICATION_ENABLED=no
+            - SPARK_RPC_ENCRYPTION_ENABLED=no
+            - SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED=no
+            - SPARK_SSL_ENABLED=no
+        volumes:
+            - ../spark/app:/usr/local/airflow/myslq # Spark scripts folder (Must be the same path in airflow and Spark Cluster)
+            - ../spark/resources:/usr/local/airflow/myslq #Resources folder (Must be the same path in airflow and Spark Cluster)
+
+    spark-worker-2:
+        image: bitnami/spark:3.1.2
+        user: root
+        networks:
+            - default_net
+        environment:
+            - SPARK_MODE=worker
+            - SPARK_MASTER_URL=spark://spark:7077
+            - SPARK_WORKER_MEMORY=1G
+            - SPARK_WORKER_CORES=1
+            - SPARK_RPC_AUTHENTICATION_ENABLED=no
+            - SPARK_RPC_ENCRYPTION_ENABLED=no
+            - SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED=no
+            - SPARK_SSL_ENABLED=no
+        volumes:
+            - ../spark/app:/usr/local/airflow/myslq # Spark scripts folder (Must be the same path in airflow and Spark Cluster)
+            - ../spark/resources:/usr/local/airflow/myslq #Resources folder (Must be the same path in airflow and Spark Cluster)
+
+    spark-worker-3:
+        image: bitnami/spark:3.1.2
+        user: root
+        networks:
+            - default_net
+        environment:
+            - SPARK_MODE=worker
+            - SPARK_MASTER_URL=spark://spark:7077
+            - SPARK_WORKER_MEMORY=1G
+            - SPARK_WORKER_CORES=1
+            - SPARK_RPC_AUTHENTICATION_ENABLED=no
+            - SPARK_RPC_ENCRYPTION_ENABLED=no
+            - SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED=no
+            - SPARK_SSL_ENABLED=no
+        volumes:
+            - ../spark/app:/usr/local/airflow/myslq # Spark scripts folder (Must be the same path in airflow and Spark Cluster)
+            - ../spark/resources:/usr/local/airflow/myslq #Resources folder (Must be the same path in airflow and Spark Cluster)
+
+    #Jupyter notebook
+    jupyter-spark:
+        image: jupyter/pyspark-notebook:spark-3.1.2
+        networks:
+            - default_net
+        ports:
+          - "8888:8888"
+          - "4040-4080:4040-4080"
+        volumes:
+          - ../spark/app:/usr/local/airflow/myslq # Spark scripts folder (Must be the same path in airflow and Spark Cluster)
+          - ../spark/resources:/usr/local/airflow/myslq #Resources folder (Must be the same path in airflow and Spark Cluster)
+
+networks:
+    default_net:

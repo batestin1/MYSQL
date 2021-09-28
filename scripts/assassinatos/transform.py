@@ -20,8 +20,6 @@ logging.basicConfig(stream=sys.stdout)
 logger = logging.getLogger('ASSASSINATO')
 logger.setLevel(logging.DEBUG)
 
-
-
 class Transform():
     def __init__(self):
         dados = Extrac().dados
